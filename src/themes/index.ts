@@ -7,7 +7,8 @@ const theme ={
     success:'#43D29B',
     error: '#e91e63',
     warn: '#FD951F' ,
-    subText:'#acacac'
+    subText:'#acacac',
+    cart: '#facf7e'
   },
 };
 

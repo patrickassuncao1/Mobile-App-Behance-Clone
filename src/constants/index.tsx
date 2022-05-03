@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
+//Home
 export const typesService = [
     {
         icon: <FontAwesome name="cutlery" size={25} color="black" />,
@@ -64,19 +65,84 @@ export const listImages = [
     {
         img: require('../../assets/images/eat1.jpg'),
         name: 'Pizza',
-        price:'20,00',
+        price: '20,00',
         id: 1
     },
     {
-        img: require('../../assets/images/eat2.jpg'),
+        img: require('../../assets/images/eat2.png'),
         name: 'Cereal',
-        price:'15,00',
+        price: '15,00',
         id: 2
     },
     {
-        img: require('../../assets/images/eat3.jpg'),
+        img: require('../../assets/images/eat3.png'),
         name: 'Salada',
-        price:'18,00',
+        price: '18,00',
         id: 3
+    },
+]
+
+//Menu
+
+export const menuList = [
+    {
+        name: "Todos",
+        key: 1
+    },
+    {
+        name: "Pizza",
+        key: 2
+    },
+    {
+        name: "Bebidas",
+        key: 3
+    },
+    {
+        name: "Doces",
+        key: 4
+    },
+    {
+        name: "Salada",
+        key: 5
+    },
+
+]
+
+export const listAllMenu = [
+    {
+        img: require('../../assets/images/eat1.jpg'),
+        name: 'Pizza',
+        type: 'Pizza',
+        price: '20,00',
+        stars: 5,
+        gram: '300g',
+        key: 1
+    },
+    {
+        img: require('../../assets/images/eat2.png'),
+        name: 'Cereal',
+        price: '15,00',
+        type: 'Doces',
+        stars: 3,
+        gram: '50g',
+        key: 2
+    },
+    {
+        img: require('../../assets/images/eat3.png'),
+        name: 'Salada',
+        price: '18,00',
+        type: 'Salada',
+        stars: 4,
+        gram: '50g',
+        key: 3
+    },
+    {
+        img: require('../../assets/images/drink.png'),
+        name: 'Bebida',
+        price: '5,00',
+        type: 'Bebidas',
+        stars: 5,
+        gram: '10g',
+        key: 4
     },
 ]

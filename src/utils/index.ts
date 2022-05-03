@@ -1,3 +1,5 @@
+import { listAllMenu } from "../constants";
+
 export type TypesValidate = ['required'] | ['required', 'email'] |
 ['email'] | ['tel'] | ['required', 'tel'];
 
@@ -28,7 +30,7 @@ const validation = {
     }
 }
 
-const validationMessage = ( validate: TypesValidate, value: string, name: string) => {
+const validationMessage = (validate: TypesValidate, value: string, name: string) => {
     const typesValidation = validate;
     const filter = [];
     let message: string | boolean = false;
@@ -48,5 +50,17 @@ const validationMessage = ( validate: TypesValidate, value: string, name: string
     return message;
 }
 
+const filterMenu = (type: string) => {
+    const data = listAllMenu;
+    const newData = [];
 
-export { maskPhone, validationMessage};
+    for (const value of data) {
+        if (value.type === type) newData.push(value);
+    }
+
+    return newData.length === 0 ? data : newData;
+
+}
+
+
+export { maskPhone, validationMessage, filterMenu };

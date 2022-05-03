@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlatList, Image, StyleSheet, Text, View, Dimensions, ScrollView, Pressable } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, ScrollView, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EvilIcons } from '@expo/vector-icons';
 import InputSearch from "../../components/InputSearch";
@@ -52,7 +52,7 @@ const Home = () => {
                             showsHorizontalScrollIndicator={false}
                             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
                             renderItem={({ item }) => (
-                                <Pressable
+                                <TouchableOpacity
                                     key={item.key}
                                     style={[stylesSecond.boxServices, stylesSecond.shadowProp]}
                                 >
@@ -61,7 +61,7 @@ const Home = () => {
                                     <Text style={{ fontSize: 11 }}>
                                         {item.name}
                                     </Text>
-                                </Pressable>
+                                </TouchableOpacity>
                             )}
                         />
                     </View>
@@ -118,7 +118,7 @@ const Home = () => {
                     </View>
 
                     <Slide />
-                    <View style={[stylesSecond.containerBox, { marginBottom: 10 }]}>
+                    <View style={[stylesSecond.containerBox, { marginBottom: 10, flex: 1 }]}>
                         <View style={[stylesSecond.flexWrap, { width: '100%', marginBottom: 10 }]}>
                             <Text>Popular:</Text>
                             <Text style={{ color: theme.colors.primary }}>Ver tudo</Text>
@@ -126,23 +126,29 @@ const Home = () => {
                         <FlatList
                             data={listImages}
                             horizontal
+                            showsHorizontalScrollIndicator={false}
+                            keyExtractor={(item) => String(item.id)}
                             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
                             renderItem={({ item }) => (
                                 <Pressable key={item.id} style={stylesSecond.list} >
-                                    <Image
-                                        source={item.img}
-                                        style={{
-                                            width: '100%',
-                                            height: '70%',
-                                            borderRadius: 10,
-                                            borderBottomLeftRadius: 0,
-                                            borderBottomRightRadius: 0
-                                        }}
-                                    />
+                                    <View style={{ width: '100%', alignItems: 'center' }}>
+                                        <Image
+                                            source={item.img}
+                                            style={{
+                                                width: '85%',
+                                                height: 120,
+                                                marginBottom: 10,
+                                                borderRadius: 10,
+                                                borderBottomLeftRadius: 0,
+                                                borderBottomRightRadius: 0
+                                            }}
+                                        />
+                                    </View>
+
                                     <Text style={stylesSecond.listPrice}>
                                         R$ {item.price}
                                     </Text>
-                                    <Text style={{ marginHorizontal: 10 }}>
+                                    <Text style={{ marginHorizontal: 12, color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </Pressable>
@@ -151,9 +157,6 @@ const Home = () => {
                     </View>
                 </View>
             </ScrollView>
-
-
-
         </SafeAreaView>
     )
 }
@@ -200,16 +203,16 @@ const stylesSecond = StyleSheet.create({
         marginTop: 2
     },
     list: {
-        height: 180,
+        paddingBottom: 15,
+        paddingTop: 20,
         width: windowWidth - (windowWidth * 0.6),
         borderRadius: 10,
         backgroundColor: theme.colors.white
     },
     listPrice: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
-        marginHorizontal: 10,
-        marginTop: 5
+        marginHorizontal: 12,
     }
 
 })
