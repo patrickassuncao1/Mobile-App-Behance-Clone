@@ -6,6 +6,7 @@ App desenvolvido para adquirir habilidades com React Native.(Em desenvolvimento)
 
 Executa seu aplicativo no modo de desenvolvimento. 
 
-Abra-o no <a href="https://expo.io" target="_blank">aplicativo Expo</a> em seu telefone para visualizá-lo.
+Abra-o no <a href="https://expo.io" target="_blank">aplicativo Expo</a> em seu telefone para visualizá-lo. Ele será recarregado se você salvar edições em seus arquivos e você verá erros de compilação e logs no terminal. 
+
 
 
