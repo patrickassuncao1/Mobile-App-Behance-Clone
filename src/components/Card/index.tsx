@@ -1,11 +1,12 @@
+import { ReactNode } from "react";
 import { StyleSheet, View } from "react-native"
 import theme from "../../themes";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
 
 interface Card {
-    children: any
+    children: ReactNode
 }
-const Card = (props : Card) => {
+const Card = (props: Card) => {
     return (
         <View
             style={[styles.card, styles.shadowProp]}
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     shadowProp: {}
 });
 
-generateBoxShadowStyle(-2, 4, '#171717', 0.2, 3, 4, '#171717',styles);
+generateBoxShadowStyle(-2, 4, '#171717', 0.2, 3, 4, '#171717', styles);
 
 export default Card;
 

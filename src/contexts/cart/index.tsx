@@ -3,7 +3,8 @@ import { CartType, StateCart } from "../../types/types";
 
 export const CartContext = createContext<CartType>({});
 
-var addOrRemove: boolean | undefined = undefined;
+var addOrRemove: 1 | 2 | 3 | undefined = undefined;
+
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
 
@@ -14,12 +15,19 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
 
         switch (addOrRemove) {
-            case true:
+            case 1:
                 setTotalValue(totalValue + 1)
                 break;
 
-            case false:
+            case 2:
                 if (totalValue > 0) setTotalValue(totalValue - 1);
+                break;
+            case 3:
+                let value = 0;
+                for (const item of shoppingCart) {
+                    value = item.qnt ? item.qnt + value : 0 + value
+                }
+                setTotalValue(value);
                 break;
         }
 
@@ -45,29 +53,34 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
             } : cart
         }) : [...shoppingCart, { ...data, qnt: 1 }]
 
-        addOrRemove = true;
+        addOrRemove = 1;
 
         setShoppingCart(newItem);
     }
 
 
     const deleteCartItem = (data: StateCart | undefined) => {
-        if (!data) return
 
         let boolean = true;
 
-        if (data.qnt === 1) boolean = false;
+        if (data?.qnt === 1) boolean = false;
 
         const newItem = boolean ? shoppingCart.map(cart => {
-            return cart.key === data.key ? {
+            return cart.key === data?.key ? {
                 ...cart,
                 qnt: cart.qnt ? cart.qnt - 1 : 0
             } : cart
-        }) : shoppingCart.filter(cart => { return cart.key !== data.key });
+        }) : shoppingCart.filter(cart => { return cart.key !== data?.key });
 
-        addOrRemove = false;
+        addOrRemove = 2;
 
         setShoppingCart(newItem);
+    }
+
+    const removeCartItem = (data: StateCart | undefined) => {
+        const remove = shoppingCart.filter(cart => { return cart.key !== data?.key })
+        addOrRemove = 3;
+        setShoppingCart(remove);
     }
 
     return (
@@ -75,7 +88,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
             addCartItem: addCartItem,
             totalValue: totalValue,
             shoppingCart: shoppingCart,
-            deleteCartItem: deleteCartItem
+            deleteCartItem: deleteCartItem,
+            removeCartItem: removeCartItem
 
         }}>
             {children}

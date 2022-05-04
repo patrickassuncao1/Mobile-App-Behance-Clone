@@ -1,5 +1,3 @@
-import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ImageSourcePropType, KeyboardTypeOptions } from 'react-native';
 
@@ -67,7 +65,8 @@ export type CartType = {
   addCartItem?: (data: StateCart | undefined) => void,
   totalValue?: number,
   shoppingCart?: StateCart[],
-  deleteCartItem?: (data: StateCart | undefined) => void
+  deleteCartItem?: (data: StateCart | undefined) => void,
+  removeCartItem?: (data: StateCart | undefined) => void
 }
 
 

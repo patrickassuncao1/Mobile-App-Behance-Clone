@@ -1,4 +1,5 @@
 import { listAllMenu } from "../constants";
+import { StateCart } from "../types/types";
 
 export type TypesValidate = ['required'] | ['required', 'email'] |
 ['email'] | ['tel'] | ['required', 'tel'];
@@ -62,5 +63,25 @@ const filterMenu = (type: string) => {
 
 }
 
+const formatCurrency = (array: StateCart[]) => {
 
-export { maskPhone, validationMessage, filterMenu };
+    let finalValues = 0;
+
+    for (const values of array) {
+        if (values.qnt && values.qnt > 1) {
+            finalValues = (parseFloat(values.price.replace(/,/g, "."))
+                * values.qnt) + finalValues;
+        } else {
+            finalValues = parseFloat(values.price.replace(/,/g, "."))
+                + finalValues;
+        }
+
+    }
+    return finalValues.toFixed(2)
+        .replace(".", ",")
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+}
+
+
+
+export { maskPhone, validationMessage, filterMenu, formatCurrency };
