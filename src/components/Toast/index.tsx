@@ -59,7 +59,7 @@ const Toast = () => {
     }
 
     return (
-        <View style={{ ...zIndex(100),}} >
+        <View style={{ ...zIndex(100), }} >
             <StatusBar
                 style={stylesStatusBar}
                 translucent={true}
@@ -74,7 +74,7 @@ const Toast = () => {
                     }]}
                 >
                     <View style={styles.msgContainer}>
-                        <Feather name="x-circle" size={26} color={theme.colors.white}  />
+                        <Feather name="x-circle" size={26} color={theme.colors.white} />
                         <Text style={styles.text} >
                             {state?.message}
                         </Text>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         paddingTop: getStatusBarHeight() + 15,
         alignSelf: 'center',
         justifyContent: 'center',
-        
+
     },
     msgContainer: {
         paddingHorizontal: 15,

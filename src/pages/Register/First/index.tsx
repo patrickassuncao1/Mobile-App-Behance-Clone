@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import { Link, useNavigation } from "@react-navigation/native";
 

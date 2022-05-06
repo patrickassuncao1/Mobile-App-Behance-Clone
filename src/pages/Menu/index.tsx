@@ -12,12 +12,11 @@ import generateBoxShadowStyle from "../../themes/BoxShandow";
 import { styles } from "../../themes/style";
 import { filterMenu } from "../../utils";
 import { useCart } from "../../contexts/cart";
+import { PropsInfoScreen } from "../../types/types";
 
-
-const Menu = () => {
+const Menu = ({ navigation }: PropsInfoScreen) => {
 
     const { addCartItem } = useCart();
-
     const [inputSearch, setInputSeach] = useState('');
     const [activeMenu, setActiveMenu] = useState({
         dataType: listAllMenu,
@@ -79,7 +78,10 @@ const Menu = () => {
                     keyExtractor={(item) => String(item.key)}
                     ListFooterComponent={() => <View style={{ marginBottom: 120 }} />}
                     renderItem={({ item }) => (
-                        <CardMenu source={item.img}>
+                        <CardMenu
+                            source={item.img}
+                            onPress={() => navigation.navigate('Info', item)}
+                        >
                             <View style={{
                                 marginHorizontal: 10,
                                 width: '45%'

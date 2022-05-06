@@ -1,18 +1,23 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from "react-native";
 import { EvilIcons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { useHeaderHeight } from '@react-navigation/elements';
+
 import theme from "../../themes";
 import { useCart } from "../../contexts/cart";
+import { PropsCartScreen, } from "../../types/types";
 
-const Cart = () => {
+const windowWidth = Dimensions.get('window').width;
+
+const Cart = ({ navigation }: PropsCartScreen) => {
     const { totalValue } = useCart();
-
     return (
         <TouchableOpacity style={[
             styles.iconBox,
             { marginRight: 10, position: 'relative' }
         ]}
+            onPress={() => navigation.navigate('Cart')}
         >
             <SimpleLineIcons name="bag" size={20} color={theme.colors.white} />
             {totalValue !== 0 && totalValue && (
@@ -27,9 +32,19 @@ const Cart = () => {
 
 const HeaderTabs = ({ ...props }) => {
 
+    const headerHeight = useHeaderHeight();
+
     return (
         <View {...props}  >
-            <View style={styles.header}>
+            <View style={[
+                styles.header, {
+                    height: props?.title === "Menu" ?
+                        headerHeight - (headerHeight * 0.29) : "100%",
+                    width: props?.title === "Menu" ?
+                        windowWidth - (windowWidth * 0.084) : '100%',
+                }
+            ]}
+            >
                 <View style={styles.container}>
                     {props.icon && (<EvilIcons name="location" size={28} color="black" />)}
                     <Text style={props.icon ? styles.iconText : styles.iconHeaderText}>
@@ -46,7 +61,9 @@ const HeaderTabs = ({ ...props }) => {
                 </View>
 
                 <View style={[styles.container, { height: '100%', alignContent: 'center' }]}>
-                    {props.title !== "Carrinho" && (<Cart />)}
+                    {props.title !== "Carrinho" && (
+                        <Cart route={props?.route} navigation={props.navigation} />
+                    )}
                     <TouchableOpacity style={styles.iconBox}>
                         <Feather name="menu" size={23} color={theme.colors.white} />
                     </TouchableOpacity>
@@ -61,7 +78,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: 'center'
+        alignItems: 'center',
     },
     iconText: {
         fontSize: 14,
@@ -76,13 +93,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexWrap: "wrap",
         alignItems: 'center',
-        alignContent: 'center',
         width: '100%',
-        height: '100%'
+        alignSelf: 'center'
     },
     iconBox: {
         width: 40,
-        height: '70%',
+        height: 40,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -102,7 +118,7 @@ const styles = StyleSheet.create({
         color: theme.colors.primary,
         fontWeight: 'bold',
         fontSize: 11,
-        textAlign:'center'
+        textAlign: 'center'
     }
 })
 

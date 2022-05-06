@@ -34,6 +34,7 @@ const Home = () => {
 
     return (
         <SafeAreaView style={styles.TabContainer}>
+            <View style={{ marginTop: 5 }}></View>
             <InputSearch
                 setInputSearch={setInputSeach}
                 placeholder="Pesquisar"

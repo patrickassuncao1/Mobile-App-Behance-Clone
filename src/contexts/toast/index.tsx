@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import { useContext, useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import theme from "../../themes";
@@ -7,7 +8,7 @@ const defaultState = {
     show: false,
     message: '',
     type: null,
-    background: theme.colors.secondary,
+    background: 'transparent',
     duration: 4000
 }
 
@@ -49,6 +50,7 @@ export const ToastContext = createContext<ToastType>({});
 
 const ToastProvider = ({ children }: ToastContextProps) => {
     const [state, dispach] = useReducer(reducer, defaultState);
+   
 
     const showToast = (message = "", background = "") => {
         dispach({ type: 'show', message: message, background: background });
