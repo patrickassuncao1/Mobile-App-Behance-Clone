@@ -1,4 +1,3 @@
-import { useRoute } from "@react-navigation/native";
 import { useContext, useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import theme from "../../themes";

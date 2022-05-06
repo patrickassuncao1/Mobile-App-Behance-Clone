@@ -59,7 +59,7 @@ const Toast = () => {
     }
 
     return (
-        <View style={{ ...zIndex(100), }} >
+        <View style={{ ...zIndex(100) }} >
             <StatusBar
                 style={stylesStatusBar}
                 translucent={true}

@@ -103,7 +103,7 @@ const Tabs = () => {
 const Routes = () => {
     return (
         <Stack.Navigator
-            initialRouteName='Login'
+            initialRouteName='Tabs'
             screenOptions={{
                 headerShown: false
             }}
