@@ -8,6 +8,8 @@ import theme from "../../themes";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
 import { styles } from "../../themes/style";
 import Slide from "../../components/Slide";
+import { useNavigation } from "@react-navigation/native";
+import { PropsStack } from "../../types/types";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -30,6 +32,8 @@ const Home = () => {
 
     const [inputSearch, setInputSeach] = useState('');
     const [numberRestaurant, setNumberRestaurant] = useState(1);
+
+    const navigation = useNavigation<PropsStack>();
 
 
     return (
@@ -128,10 +132,13 @@ const Home = () => {
                             data={listImages}
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            keyExtractor={(item) => String(item.id)}
+                            keyExtractor={(item) => String(item.key)}
                             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
                             renderItem={({ item }) => (
-                                <Pressable key={item.id} style={stylesSecond.list} >
+                                <Pressable
+                                    onPress={() => navigation.navigate('Info', item)}
+                                    style={stylesSecond.list}
+                                >
                                     <View style={{ width: '100%', alignItems: 'center' }}>
                                         <Image
                                             source={item.img}

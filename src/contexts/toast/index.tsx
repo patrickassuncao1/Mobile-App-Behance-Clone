@@ -7,7 +7,7 @@ const defaultState = {
     show: false,
     message: '',
     type: null,
-    background: 'transparent',
+    background: theme.colors.secondary,
     duration: 4000
 }
 

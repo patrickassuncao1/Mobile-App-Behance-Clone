@@ -82,6 +82,18 @@ const formatCurrency = (array: StateCart[]) => {
         .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 }
 
+const checkItemCart = (array: StateCart[], keyItem: number) => {
+    let checkQntd = 0;
 
+    for (const item of array) {
+        if (item.key === keyItem) {
+            checkQntd = item.qnt ? item.qnt : 0;
+            break;
+        }
+    }
 
-export { maskPhone, validationMessage, filterMenu, formatCurrency };
+    return checkQntd;
+
+}
+
+export { maskPhone, validationMessage, filterMenu, formatCurrency, checkItemCart };

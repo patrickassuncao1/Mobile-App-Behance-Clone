@@ -65,20 +65,29 @@ export const listImages = [
     {
         img: require('../../assets/images/eat1.jpg'),
         name: 'Pizza',
+        type: 'Pizza',
         price: '20,00',
-        id: 1
+        stars: 5,
+        gram: '300g',
+        key: 1
     },
     {
         img: require('../../assets/images/eat2.png'),
         name: 'Cereal',
         price: '15,00',
-        id: 2
+        type: 'Doces',
+        stars: 3,
+        gram: '50g',
+        key: 2
     },
     {
         img: require('../../assets/images/eat3.png'),
         name: 'Salada',
         price: '18,00',
-        id: 3
+        type: 'Salada',
+        stars: 4,
+        gram: '50g',
+        key: 3
     },
 ]
 

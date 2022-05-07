@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Feather } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { Feather, SimpleLineIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import RegisterScreen from '../pages/Register/First';
 import RegisterScreenSecond from '../pages/Register/Second';
@@ -15,6 +14,7 @@ import Menu from '../pages/Menu';
 import CartProvider from '../contexts/cart';
 import Cart from '../pages/Cart';
 import Info from '../pages/Menu/Info';
+import Profile from '../pages/Profile';
 
 const Tab = createBottomTabNavigator<propsNavigationTabs>();
 const Stack = createNativeStackNavigator<propsNavigationStack>();
@@ -45,7 +45,6 @@ const RouteMenu = ({ navigation }: PropsCartScreen) => {
                     headerStyle: {
                         backgroundColor: theme.colors.white
                     },
-                   
                 }}
                 initialParams={{}}
             />
@@ -92,6 +91,15 @@ const Tabs = () => {
                         ),
                         tabBarActiveTintColor: theme.colors.primary,
                     })}
+                />
+                <Tab.Screen name="Profile" component={Profile}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <FontAwesome5 name="user-circle" color={color} size={size} />
+                        ),
+                        tabBarActiveTintColor: theme.colors.primary,
+                        tabBarLabel: 'Perfil'
+                    }}
                 />
 
             </Tab.Navigator>
