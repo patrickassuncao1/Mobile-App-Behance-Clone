@@ -27,7 +27,8 @@ export type propsNavigationStack = {
   Login: undefined;
   Tabs: undefined,
   Items: undefined,
-  Info: StateCart
+  Info: StateCart,
+  Home: undefined,
 };
 
 export type propsNavigationMenu = {
@@ -36,7 +37,7 @@ export type propsNavigationMenu = {
 }
 
 export type propsNavigationTabs = {
-  Home: undefined,
+  RouteHome: undefined,
   Menu: undefined,
   Cart: undefined,
   Profile: undefined

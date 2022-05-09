@@ -38,9 +38,9 @@ const HeaderTabs = ({ ...props }) => {
         <View {...props}  >
             <View style={[
                 styles.header, {
-                    height: props?.title === "Menu" ?
+                    height: props?.title === "Menu" || props?.title === "Home"  ?
                         headerHeight - (headerHeight * 0.29) : "100%",
-                    width: props?.title === "Menu" ?
+                    width: props?.title === "Menu" || props?.title === "Home" ?
                         windowWidth - (windowWidth * 0.084) : '100%',
                 }
             ]}

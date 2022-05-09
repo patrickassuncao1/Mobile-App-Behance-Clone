@@ -9,7 +9,8 @@ import generateBoxShadowStyle from "../../themes/BoxShandow";
 import { styles } from "../../themes/style";
 import Slide from "../../components/Slide";
 import { useNavigation } from "@react-navigation/native";
-import { PropsStack } from "../../types/types";
+import { PropsCartScreen, propsNavigationStack, PropsStack } from "../../types/types";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -18,6 +19,8 @@ type Icons = {
     name: 'location' | 'clock' | 'star',
     text: string
 }
+
+type Props = NativeStackScreenProps<propsNavigationStack, 'Info'>;
 
 const Icons = ({ name, text }: Icons) => {
     return (
@@ -28,13 +31,12 @@ const Icons = ({ name, text }: Icons) => {
     )
 }
 
-const Home = () => {
+
+
+const Home = ({ navigation }: Props) => {
 
     const [inputSearch, setInputSeach] = useState('');
     const [numberRestaurant, setNumberRestaurant] = useState(1);
-
-    const navigation = useNavigation<PropsStack>();
-
 
     return (
         <SafeAreaView style={styles.TabContainer}>
@@ -136,7 +138,9 @@ const Home = () => {
                             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
                             renderItem={({ item }) => (
                                 <Pressable
-                                    onPress={() => navigation.navigate('Info', item)}
+                                    onPress={() => {
+                                        navigation.navigate('Info', item)
+                                    }}
                                     style={stylesSecond.list}
                                 >
                                     <View style={{ width: '100%', alignItems: 'center' }}>

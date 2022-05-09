@@ -92,10 +92,9 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingHorizontal: 7,
         paddingBottom: 15,
-        paddingTop: getStatusBarHeight() + 15,
+        paddingTop: 10,
         alignSelf: 'center',
         justifyContent: 'center',
-
     },
     msgContainer: {
         paddingHorizontal: 15,
