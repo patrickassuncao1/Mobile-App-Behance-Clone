@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Image, StyleSheet, View, Dimensions, Text, ImageSourcePropType, Pressable, GestureResponderEvent } from "react-native";
+import { Image, StyleSheet, View, Dimensions, ImageSourcePropType, Pressable, GestureResponderEvent } from "react-native";
 import theme from "../../themes";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
 
@@ -18,7 +18,7 @@ const CardMenu = ({ source, children, onPress }: CardMenuType) => {
             <Pressable style={styles.itemImage} onPress={onPress}>
                 <Image
                     source={source}
-                    style={{ width: '100%', height: '90%' }}
+                    style={{ width: '100%', height: '95%' }}
                 />
             </Pressable>
             {children}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.white,
         flexWrap: 'wrap',
         flexDirection: "row",
-        alignItems: 'center'
+        alignItems: 'center',
     },
     itemImage: {
         justifyContent: 'center',

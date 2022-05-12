@@ -147,7 +147,7 @@ const Home = ({ navigation }: Props) => {
                                         <Image
                                             source={item.img}
                                             style={{
-                                                width: '85%',
+                                                width: '82%',
                                                 height: 120,
                                                 marginBottom: 10,
                                                 borderRadius: 10,

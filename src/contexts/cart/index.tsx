@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { CartType, StateCart } from "../../types/types";
 
 export const CartContext = createContext<CartType>({});
@@ -77,11 +77,11 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         setShoppingCart(newItem);
     }
 
-    const removeCartItem = (data: StateCart | undefined) => {
-        const remove = shoppingCart.filter(cart => { return cart.key !== data?.key })
+    const removeCartItem = useCallback((data: StateCart | undefined) => {
         addOrRemove = 3;
-        setShoppingCart(remove);
-    }
+        setShoppingCart((items) => items.filter((item) => item.key !== data?.key));
+    }, []);
+
 
     return (
         <CartContext.Provider value={{

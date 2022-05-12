@@ -1,16 +1,13 @@
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from "react-native";
+import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 
-import CardMenu from "../../components/CardMenu";
 import { useCart } from "../../contexts/cart";
 import { styles } from "../../themes/style";
 import theme from "../../themes";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
 import { formatCurrency } from "../../utils";
 import ButtonNext from "../../components/ButtonNext";
-
+import ItemCart from "../../components/ItemCart";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -45,69 +42,21 @@ const Cart = () => {
                 <FlatList
                     data={shoppingCart}
                     showsVerticalScrollIndicator={false}
-                    ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-                    keyExtractor={(_, index) => String(index)}
+                  /*   ItemSeparatorComponent={() => <View style={{ height: 10 }} />} */
+                    keyExtractor={(item) => String(item.key)}
+                    refreshing={true}
                     ListEmptyComponent={() => <EmptyCart />}
                     ListFooterComponent={() => <View style={{ marginBottom: 10 }} />}
-                    renderItem={({ item }) => (
-                        <ScrollView
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                            snapToAlignment={'start'}
-                            scrollEventThrottle={16}
-                            decelerationRate={'fast'}
-                            snapToOffsets={[windowWidth - (windowWidth * 0.5)]}
-                        >
-                            <CardMenu source={item.img} >
-                                <View style={stylesSecond.view}>
-                                    <View style={stylesSecond.description}>
-                                        <View >
-                                            <Text style={stylesSecond.textCard}>{item.name}</Text>
-                                            <Text style={{ marginTop: 2 }}>{item.gram}</Text>
-                                        </View>
+                    renderItem={({ item, index }) => (
+                        <View key={index}>
+                            <ItemCart
+                                addCartItem={addCartItem}
+                                removeCartItem={removeCartItem}
+                                deleteCartItem={deleteCartItem}
+                                item={item}
+                            />
+                        </View>
 
-                                        <Text style={stylesSecond.textPrice}>R$ {item.price}</Text>
-                                    </View>
-
-                                    <View style={stylesSecond.viewIcons}>
-                                        <TouchableOpacity onPress={() => {
-                                            if (addCartItem) addCartItem(item);
-                                        }}>
-                                            <MaterialIcons
-                                                name="add-box"
-                                                size={30}
-                                                color={theme.colors.primary}
-                                            />
-                                        </TouchableOpacity>
-                                        <Text style={stylesSecond.textNumber}>
-                                            {item.qnt}
-                                        </Text>
-                                        <TouchableOpacity onPress={() => {
-                                            if (deleteCartItem) deleteCartItem(item);
-                                        }}>
-                                            <AntDesign
-                                                name="minussquare"
-                                                size={26}
-                                                color={theme.colors.primary}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-
-                                </View>
-                            </CardMenu>
-                            <View style={{ width: 10 }} />
-                            <View style={[
-                                stylesSecond.viewIconDelee,
-                                stylesSecond.shadowProp
-                            ]}>
-                                <TouchableOpacity onPress={() => {
-                                    if (removeCartItem) removeCartItem(item);
-                                }}>
-                                    <AntDesign name="delete" size={30} color="black" />
-                                </TouchableOpacity>
-
-                            </View>
-                        </ScrollView>
                     )}
                 />
             </View>
@@ -181,16 +130,6 @@ const stylesSecond = StyleSheet.create({
         flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    viewIconDelee: {
-        backgroundColor: theme.colors.white,
-        paddingTop: 30,
-        paddingBottom: 30,
-        borderRadius: 10,
-        width: windowWidth - (windowWidth * 0.8),
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
     },
     textInfo: {
         flexWrap: 'wrap',
