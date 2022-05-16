@@ -7,6 +7,7 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import theme from "../../themes";
 import { useCart } from "../../contexts/cart";
 import { PropsCartScreen, } from "../../types/types";
+import { useMenu } from "../../contexts/menu";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -34,11 +35,13 @@ const HeaderTabs = ({ ...props }) => {
 
     const headerHeight = useHeaderHeight();
 
+    const { activeMenu } = useMenu();
+
     return (
         <View {...props}  >
             <View style={[
                 styles.header, {
-                    height: props?.title === "Menu" || props?.title === "Home"  ?
+                    height: props?.title === "Menu" || props?.title === "Home" ?
                         headerHeight - (headerHeight * 0.29) : "100%",
                     width: props?.title === "Menu" || props?.title === "Home" ?
                         windowWidth - (windowWidth * 0.084) : '100%',
@@ -64,7 +67,10 @@ const HeaderTabs = ({ ...props }) => {
                     {props.title !== "Carrinho" && (
                         <Cart route={props?.route} navigation={props.navigation} />
                     )}
-                    <TouchableOpacity style={styles.iconBox}>
+                    <TouchableOpacity
+                        style={styles.iconBox}
+                        onPress={activeMenu}
+                    >
                         <Feather name="menu" size={23} color={theme.colors.white} />
                     </TouchableOpacity>
                 </View>
