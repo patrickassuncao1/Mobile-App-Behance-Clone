@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, ScrollView, Pressable } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View, Dimensions, ScrollView, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EvilIcons } from '@expo/vector-icons';
 import InputSearch from "../../components/InputSearch";
@@ -8,8 +8,7 @@ import theme from "../../themes";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
 import { styles } from "../../themes/style";
 import Slide from "../../components/Slide";
-import { useNavigation } from "@react-navigation/native";
-import { PropsCartScreen, propsNavigationStack, PropsStack } from "../../types/types";
+import { propsNavigationStack } from "../../types/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
@@ -59,7 +58,7 @@ const Home = ({ navigation }: Props) => {
                             showsHorizontalScrollIndicator={false}
                             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
                             renderItem={({ item }) => (
-                                <TouchableOpacity
+                                <View
                                     key={item.key}
                                     style={[stylesSecond.boxServices, stylesSecond.shadowProp]}
                                 >
@@ -68,7 +67,7 @@ const Home = ({ navigation }: Props) => {
                                     <Text style={{ fontSize: 11 }}>
                                         {item.name}
                                     </Text>
-                                </TouchableOpacity>
+                                </View>
                             )}
                         />
                     </View>

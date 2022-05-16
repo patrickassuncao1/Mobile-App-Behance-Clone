@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import CardMenu from "../CardMenu";
 import theme from "../../themes";
 import { StateCart } from "../../types/types";
+import { zIndex } from "../../utils";
 
 type TypeItemCart = {
     addCartItem?: (data: StateCart | undefined) => void,
@@ -21,6 +22,9 @@ const ItemCart = ({ addCartItem, deleteCartItem, removeCartItem, item }: TypeIte
     const [translateX] = useState(new Animated.Value(0));
     const [maxHeightContent] = useState(new Animated.Value(200));
     const [marginTopContent] = useState(new Animated.Value(10));
+    const [opacityContainerIcon] = useState(new Animated.Value(1));
+
+    const [deleteOn, setDeleteOn] = useState('black');
 
     const swipeLeft = () => {
         Animated.sequence([
@@ -30,18 +34,23 @@ const ItemCart = ({ addCartItem, deleteCartItem, removeCartItem, item }: TypeIte
                 easing: Easing.linear,
                 useNativeDriver: false,
             }),
+            Animated.timing(marginTopContent, {
+                toValue: 0,
+                duration: 80,
+                easing: Easing.linear,
+                useNativeDriver: false,
+            }),
             Animated.timing(maxHeightContent, {
                 toValue: 0,
                 duration: 100,
                 easing: Easing.linear,
                 useNativeDriver: false,
             }),
-            Animated.timing(marginTopContent, {
+            Animated.timing(opacityContainerIcon, {
                 toValue: 0,
-                duration: 100,
-                easing: Easing.linear,
+                duration: 80,
                 useNativeDriver: false,
-            })
+            }),
         ]).start(() => {
             removeCartItem && removeCartItem(item)
         })
@@ -61,6 +70,8 @@ const ItemCart = ({ addCartItem, deleteCartItem, removeCartItem, item }: TypeIte
             onStartShouldSetPanResponder: () => true,
             onPanResponderMove: (event, gesture) => {
                 gesture.dx < 0 && translateX.setValue(gesture.dx);
+                gesture.dx < -(windowWidth * 0.25) ? setDeleteOn('red')
+                    : setDeleteOn('black');
             },
             onPanResponderRelease: (event, gesture) => {
                 gesture.dx < -(windowWidth * 0.25) ? swipeLeft()
@@ -81,12 +92,25 @@ const ItemCart = ({ addCartItem, deleteCartItem, removeCartItem, item }: TypeIte
         maxHeight: maxHeightContent
     }
 
+
+    const IconDelete = () => {
+
+        return (
+            <View style={styles.iconDelete}>
+                <Animated.View style={[styles.viewIconDelee, { opacity: opacityContainerIcon }]}>
+                    <AntDesign name="delete" size={30} color={deleteOn} />
+                </Animated.View>
+            </View>
+
+        )
+    }
+
     return (
         <Animated.View
             style={styleContent}
-            {...panResponder.panHandlers}
         >
-            <Animated.View style={styleCard}>
+            <IconDelete />
+            <Animated.View style={[styleCard]}  {...panResponder.panHandlers}>
                 <CardMenu source={item.img} >
                     <View style={styles.view}>
                         <View style={styles.description}>
@@ -124,7 +148,6 @@ const ItemCart = ({ addCartItem, deleteCartItem, removeCartItem, item }: TypeIte
                     </View>
                 </CardMenu>
             </Animated.View>
-
         </Animated.View>
 
     )
@@ -171,8 +194,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        height: '90%',
+        width: windowWidth * 0.20
     },
+    iconDelete: {
+        ...zIndex(-10),
+        height: '100%',
+        position: 'absolute',
+        right: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    }
 
 })
 

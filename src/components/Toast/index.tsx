@@ -1,10 +1,11 @@
 import { StatusBar, StatusBarStyle } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { Platform, StyleSheet, Text, TouchableWithoutFeedback, View, Animated, Easing } from "react-native"
+import { StyleSheet, Text, TouchableWithoutFeedback, View, Animated, Easing } from "react-native"
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { Feather } from '@expo/vector-icons';
 import theme from "../../themes";
 import { useToast } from "../../contexts/toast";
+import { zIndex } from "../../utils";
 
 var timer: any = null;
 
@@ -13,7 +14,6 @@ const Toast = () => {
     const { state, hiddenToast } = useToast();
     const [stylesStatusBar, setStylesStatusBar] = useState<StatusBarStyle>('dark');
     const [pos] = useState(new Animated.Value(-(getStatusBarHeight() + 50)));
-
 
     useEffect(() => {
         state?.show && show();
@@ -51,12 +51,6 @@ const Toast = () => {
         hide();
     }
 
-    const zIndex = (val: number) => {
-        return Platform.select({
-            ios: { zIndex: val },
-            android: { elevation: val }
-        })
-    }
 
     return (
         <View style={{ ...zIndex(100) }} >

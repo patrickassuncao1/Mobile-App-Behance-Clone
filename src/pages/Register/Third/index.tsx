@@ -105,6 +105,8 @@ const RegisterScreenThird = ({ route, navigation }: Props) => {
                 : console.log('deu erro');
             return
         }
+
+        navigation.navigate('Tabs');
     }
 
 

@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import { listAllMenu } from "../constants";
 import { StateCart } from "../types/types";
 
@@ -96,4 +97,11 @@ const checkItemCart = (array: StateCart[], keyItem: number) => {
 
 }
 
-export { maskPhone, validationMessage, filterMenu, formatCurrency, checkItemCart };
+const zIndex = (val: number) => {
+    return Platform.select({
+        ios: { zIndex: val },
+        android: { elevation: val }
+    })
+}
+
+export { maskPhone, validationMessage, filterMenu, formatCurrency, checkItemCart, zIndex };

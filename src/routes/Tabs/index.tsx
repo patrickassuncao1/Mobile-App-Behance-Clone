@@ -31,7 +31,8 @@ const RouteMenu = ({ navigation }: PropsCartScreen) => {
                 options={{
                     headerTitle: (props) => <HeaderTabs
                         {...props} title="Menu" navigation={navigation} />,
-                    headerStyle: { backgroundColor: theme.colors.secondary }
+                    headerStyle: { backgroundColor: theme.colors.secondary },
+                    
                 }}
             />
             <Stack.Screen
