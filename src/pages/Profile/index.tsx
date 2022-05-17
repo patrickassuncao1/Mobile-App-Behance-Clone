@@ -1,23 +1,40 @@
 import { ReactNode } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context"
 import { MaterialIcons, Foundation, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import theme from "../../themes";
 import { styles } from "../../themes/style";
 import generateBoxShadowStyle from "../../themes/BoxShandow";
+import { useNavigation } from "@react-navigation/native";
+import { PropsStack } from "../../types/types";
 
+type CartType = {
+    children: ReactNode,
+    text: string,
+    onPress?: () => void
+}
 
-const Cart = ({ children, text }: { children: ReactNode, text: string }) => {
+const Cart = ({ children, text, onPress }: CartType) => {
     return (
-        <View style={[stylesSecond.cart, stylesSecond.shadowProp]}>
+        <TouchableOpacity
+            style={[stylesSecond.cart, stylesSecond.shadowProp]}
+            onPress={onPress}
+        >
             {children}
             <Text style={stylesSecond.cartText}>{text}</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const Profile = () => {
+
+    const navigation = useNavigation<PropsStack>();
+
+    const logout = () => {
+        navigation.navigate('RegisterFirst');
+    }
+
     return (
         <SafeAreaView style={styles.TabContainer}>
             <View style={stylesSecond.circleImg}>
@@ -40,12 +57,12 @@ const Profile = () => {
 
             </View>
             <View style={stylesSecond.viewCards}>
-                <Cart text="Contatos">
-                    <AntDesign name="contacts" size={70} color={theme.colors.primary} />
-                </Cart>
-                <View style={{ width: 15 }}></View>
                 <Cart text="Pedidos">
                     <MaterialCommunityIcons name="menu-open" size={70} color={theme.colors.primary} />
+                </Cart>
+                <View style={{ width: 15 }}></View>
+                <Cart text="Sair" onPress={logout}>
+                    <AntDesign name="logout" size={70} color={theme.colors.primary} />
                 </Cart>
             </View>
 
