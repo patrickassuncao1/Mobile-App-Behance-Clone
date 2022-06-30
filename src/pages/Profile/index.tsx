@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context"
 import { MaterialIcons, Foundation, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -43,39 +43,41 @@ const Profile = () => {
                     style={stylesSecond.img}
                 />
             </View>
-            <Text style={[styles.title, stylesSecond.title]}>UserName</Text>
+            <Text style={[styles.title, stylesSecond.title]}>Patrick</Text>
             <Text style={stylesSecond.number}>+55 (00) 00000-0000</Text>
-
-            <View style={stylesSecond.viewCards}>
-                <Cart text="Saldo">
-                    <MaterialIcons name="attach-money" size={70} color={theme.colors.primary} />
-                </Cart>
-                <View style={{ width: 15 }}></View>
-                <Cart text="Bônus">
-                    <Foundation name="burst-sale" size={70} color={theme.colors.primary} />
-                </Cart>
-
-            </View>
-            <View style={stylesSecond.viewCards}>
-                <Cart text="Pedidos">
-                    <MaterialCommunityIcons name="menu-open" size={70} color={theme.colors.primary} />
-                </Cart>
-                <View style={{ width: 15 }}></View>
-                <Cart text="Sair" onPress={logout}>
-                    <AntDesign name="logout" size={70} color={theme.colors.primary} />
-                </Cart>
-            </View>
-
             <View style={{ marginBottom: 10 }}></View>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{width: '90%'}}
+            >
+                <View style={stylesSecond.viewCards}>
+                    <Cart text="Saldo">
+                        <MaterialIcons name="attach-money" size={70} color={theme.colors.primary} />
+                    </Cart>
+                    <Cart text="Bônus">
+                        <Foundation name="burst-sale" size={70} color={theme.colors.primary} />
+                    </Cart>
+
+                </View>
+                <View style={stylesSecond.viewCards}>
+                    <Cart text="Pedidos">
+                        <MaterialCommunityIcons name="menu-open" size={70} color={theme.colors.primary} />
+                    </Cart>
+                    <Cart text="Sair" onPress={logout}>
+                        <AntDesign name="logout" size={70} color={theme.colors.primary} />
+                    </Cart>
+                </View>
+                <View style={{ marginBottom: 10 }}></View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
 
 const stylesSecond = StyleSheet.create({
     circleImg: {
-        width: '60%',
+        width: 250,
         backgroundColor: theme.colors.white,
-        height: '35%',
+        height: 250,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 999
@@ -110,7 +112,7 @@ const stylesSecond = StyleSheet.create({
     viewCards: {
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
         marginTop: 15,
     }

@@ -36,7 +36,7 @@ const Info = ({ route }: PropsInfoScreen) => {
 
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ flex: 1 }}
+                
                 style={{ width: '100%' }}
             >
                 <View style={styleSecond.view}>
@@ -137,8 +137,9 @@ const styleSecond = StyleSheet.create({
         maxWidth: '90%',
     },
     img: {
-        width: '68%',
-        height: windowHeight - (windowHeight * 0.68)
+        width: 250,
+        height: 250,
+        resizeMode: 'contain'
     },
     view: {
         maxWidth: '100%',

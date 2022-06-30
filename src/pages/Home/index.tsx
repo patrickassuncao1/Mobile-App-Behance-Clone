@@ -34,16 +34,16 @@ const Icons = ({ name, text }: Icons) => {
 
 const Home = ({ navigation }: Props) => {
 
-    const [inputSearch, setInputSeach] = useState('');
+    const [inputSearch, setInputSearch] = useState('');
     const [numberRestaurant, setNumberRestaurant] = useState(1);
 
     return (
         <SafeAreaView style={styles.TabContainer}>
             <View style={{ marginTop: 5 }}></View>
             <InputSearch
-                setInputSearch={setInputSeach}
+                setInputSearch={setInputSearch}
                 placeholder="Pesquisar"
-                onChangeText={(text) => setInputSeach(text)}
+                onChangeText={(text) => setInputSearch(text)}
                 value={inputSearch}
             />
 
